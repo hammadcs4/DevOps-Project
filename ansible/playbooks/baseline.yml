@@ -1,0 +1,32 @@
+---
+- name: Baseline Configuration
+  hosts: all
+  become: yes
+  tasks:
+    - name: Update package cache
+      apt:
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+
+    - name: Install common packages
+      apt:
+        name:
+          - curl
+          - wget
+          - git
+          - vim
+        state: present
+      when: ansible_os_family == "Debian"
+
+    - name: Ensure SSH is running
+      service:
+        name: ssh
+        state: started
+        enabled: yes
+
+    - name: Configure firewall (allow SSH)
+      ufw:
+        rule: allow
+        port: '22'
+        proto: tcp
+      when: ansible_os_family == "Debian"
