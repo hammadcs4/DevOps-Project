@@ -4,7 +4,8 @@
   "description": "A simple DevOps demo app",
   "main": "app.js",
  "scripts": {
-  "test": "jest --passWithNoTests"
+  "test": "jest --passWithNoTests",
+  "build": "echo 'No build step required'"
 },
 
   "dependencies": {
